@@ -1,0 +1,42 @@
+boot.o: boot.S multiboot.h x86_desc.h types.h
+keyboard_handler.o: keyboard_handler.S keyboard_handler.h
+paging_init_asm.o: paging_init_asm.S paging_init_asm.h
+pit_handler.o: pit_handler.S pit_handler.h
+rtc_handler.o: rtc_handler.S rtc_handler.h
+systemcall_handler.o: systemcall_handler.S systemcall_handler.h
+x86_desc.o: x86_desc.S x86_desc.h types.h
+exception_handler.o: exception_handler.c exception_handler.h types.h \
+  lib.h systemcalls.h systemcall_handler.h filesystem.h multiboot.h \
+  paging.h paging_init_asm.h rtc.h i8259.h rtc_handler.h x86_desc.h
+filesystem.o: filesystem.c filesystem.h types.h multiboot.h systemcalls.h \
+  systemcall_handler.h paging.h lib.h paging_init_asm.h rtc.h i8259.h \
+  rtc_handler.h x86_desc.h exception_handler.h
+i8259.o: i8259.c i8259.h types.h lib.h
+idt.o: idt.c idt.h rtc.h i8259.h types.h rtc_handler.h x86_desc.h \
+  exception_handler.h systemcall_handler.h pit_handler.h keyboard.h \
+  keyboard_handler.h
+kernel.o: kernel.c multiboot.h types.h x86_desc.h lib.h i8259.h rtc.h \
+  rtc_handler.h keyboard.h keyboard_handler.h filesystem.h systemcalls.h \
+  systemcall_handler.h paging.h paging_init_asm.h exception_handler.h \
+  idt.h debug.h tests.h pit.h pit_handler.h terminal.h
+keyboard.o: keyboard.c keyboard.h i8259.h types.h keyboard_handler.h \
+  lib.h terminal.h scheduler.h
+lib.o: lib.c lib.h types.h paging.h paging_init_asm.h systemcalls.h \
+  systemcall_handler.h filesystem.h multiboot.h rtc.h i8259.h \
+  rtc_handler.h x86_desc.h exception_handler.h
+paging.o: paging.c paging.h lib.h types.h paging_init_asm.h
+pit.o: pit.c pit.h types.h i8259.h lib.h pit_handler.h scheduler.h \
+  systemcalls.h systemcall_handler.h filesystem.h multiboot.h paging.h \
+  paging_init_asm.h rtc.h rtc_handler.h x86_desc.h exception_handler.h
+rtc.o: rtc.c rtc.h i8259.h types.h rtc_handler.h lib.h
+scheduler.o: scheduler.c scheduler.h types.h paging.h lib.h \
+  paging_init_asm.h systemcalls.h systemcall_handler.h filesystem.h \
+  multiboot.h rtc.h i8259.h rtc_handler.h x86_desc.h exception_handler.h \
+  pit.h pit_handler.h
+systemcalls.o: systemcalls.c systemcalls.h types.h systemcall_handler.h \
+  filesystem.h multiboot.h paging.h lib.h paging_init_asm.h rtc.h \
+  i8259.h rtc_handler.h x86_desc.h exception_handler.h terminal.h
+terminal.o: terminal.c terminal.h types.h lib.h
+tests.o: tests.c tests.h x86_desc.h types.h rtc.h i8259.h rtc_handler.h \
+  lib.h idt.h paging.h paging_init_asm.h terminal.h filesystem.h \
+  multiboot.h systemcalls.h systemcall_handler.h exception_handler.h
